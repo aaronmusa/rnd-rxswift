@@ -13,7 +13,6 @@ import Firebase
 
 class LoginViewController: UIViewController {
 
-
     @IBOutlet weak var emailTextField: UITextField!
     
     @IBOutlet weak var passwordTextField: UITextField!
@@ -29,7 +28,7 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        viewModel = LoginViewModel()
+        viewModel = LoginViewModel(repository: Repository.shared)
         
         emailTextField.rx.text.map { $0 ?? "" }.bind(to: viewModel.email).disposed(by: bag)
         passwordTextField.rx.text.map { $0 ?? "" }.bind(to: viewModel.password).disposed(by: bag)
@@ -41,13 +40,11 @@ class LoginViewController: UIViewController {
         }).disposed(by: bag)
         
         loginButton.rx.tap.subscribe(onNext: { [unowned self] in
-            self.viewModel.signIn(success: {
+            self.viewModel.signIn().bind(onNext: { (user) in
                 if let viewController = StoryBoard.main.instantiateViewController(withIdentifier: "HomeViewController") as? HomeViewController {
                     self.present(viewController, animated: true, completion: nil)
                 }
-            }, failed: {
-                self.errorMessageLabel.text = "error"
-            })
+            }).disposed(by: self.bag)
         }).disposed(by: bag)
     }
 }
