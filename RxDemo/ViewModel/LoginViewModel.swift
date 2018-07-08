@@ -26,13 +26,14 @@ struct LoginViewModel {
 //    var failed: Driver<Bool>
 //    var success: Driver<User?>
     
-    var repository: Repository!
+    var repository: RepositoryProtocol!
     
     var isValid: Observable<Bool> {
         return Observable.combineLatest( self.email.asObservable(), self.password.asObservable())
         { (email, password) in
             return email.count >= 5
                 && password.count >= 5
+                && email.isValidEmail()
         }
     }
     
@@ -42,7 +43,7 @@ struct LoginViewModel {
 //        }
 //    }
     
-    init(repository: Repository) {
+    init(repository: RepositoryProtocol) {
         self.repository = repository
     }
     
@@ -63,11 +64,11 @@ struct LoginViewModel {
     //        })
     //    }
     
-    func signIn() -> Observable<User> {
+    func signIn() -> Observable<Any> {
         return Observable.create({ (observer) -> Disposable in
             self.repository.signIn(email: self.email.value, password: self.password.value).subscribe(onNext: { user in
                 
-                observer.onNext(user)
+                observer.onNext(())
             },
             onError: { error in
                 print("error")
@@ -123,16 +124,5 @@ struct LoginViewModel {
 //    }
     
 
-    
-//    func signOut(success: @escaping: () -> Void) {
-//        return Observable.create({ (observer) -> Disposable in
-//            do {
-//                try Auth.auth().signOut()
-//                observer.onCompleted()
-//            } catch let error as NSError {
-//                print(error.localizedDescription)
-//                observer.onError(error)
-//            }
-//        })
-//    }
+
 }

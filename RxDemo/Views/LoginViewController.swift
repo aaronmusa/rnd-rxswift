@@ -13,6 +13,7 @@ import Firebase
 
 class LoginViewController: UIViewController {
 
+    @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var emailTextField: UITextField!
     
     @IBOutlet weak var passwordTextField: UITextField!
@@ -35,16 +36,32 @@ class LoginViewController: UIViewController {
         
         viewModel.isValid.bind(to: loginButton.rx.isEnabled).disposed(by: bag)
         
-        viewModel.isValid.subscribe(onNext: { [unowned self] isValid in
-            self.errorMessageLabel.text = isValid ? "Enabled" : "Not Enabled"
+        viewModel.email.subscribe(onNext: { _ in
+            self.errorMessageLabel.text = ""
         }).disposed(by: bag)
         
-        loginButton.rx.tap.subscribe(onNext: { [unowned self] in
-            self.viewModel.signIn().bind(onNext: { (user) in
+        viewModel.password.subscribe(onNext: { _ in
+            self.errorMessageLabel.text = ""
+        }).disposed(by: bag)
+        
+        loginButton.rx.tap.subscribe(onNext: { _  in
+            self.viewModel.signIn().subscribe(onNext: { (_ ) in
                 if let viewController = StoryBoard.main.instantiateViewController(withIdentifier: "HomeViewController") as? HomeViewController {
                     self.present(viewController, animated: true, completion: nil)
                 }
+            }, onError: { (error) in
+                self.errorMessageLabel.isHidden = false
+                self.errorMessageLabel.text = error.localizedDescription
             }).disposed(by: self.bag)
+        }).disposed(by: bag)
+        
+        signUpButton.rx.tap.subscribe(onNext: { _ in
+            //if let nav = StoryBoard.main.instantiateViewController(withIdentifier: "SignUpViewController") as? UINavigationController {
+                if let signUpViewController = StoryBoard.main.instantiateViewController(withIdentifier: "SignUpViewController") as? SignUpViewController {
+                    self.show(signUpViewController, sender: self)
+//                    self.present(signUpViewController, animated: true, completion: nil)
+                }
+            //}
         }).disposed(by: bag)
     }
 }

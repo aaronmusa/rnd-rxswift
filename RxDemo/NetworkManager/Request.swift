@@ -8,17 +8,17 @@
 
 import Foundation
 
-//protocol JSONRequest {
-//    var parameters: [String: Any] { get }
-//}
-//
-//struct LoginRequest: JSONRequest {
-//    var email: String!
-//    var password: String!
-//    
-//    internal var parameters: [String : Any] {
-//        return ["email": email,
-//                "password": password]
-//    }
-//}
+protocol JSONRequest {
+    var parameters: [String: Any] { get }
+}
+
+struct LoginRequest: JSONRequest {
+    var email: String!
+    var password: String!
+    
+    internal var parameters: [String : Any] {
+        return ["email": email,
+                "password": password]
+    }
+}
 

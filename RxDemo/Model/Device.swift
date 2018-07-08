@@ -14,7 +14,7 @@ class Device: NSObject, NSCoding {
     
     init(json: [String: Any]) {
         accessToken = json["accessToken"] as? String
-        user = User(json:json["user"] as! [String: Any])
+        user = User(json: json["user"] as! [String: Any])
     }
     
     required init(coder decoder: NSCoder) {

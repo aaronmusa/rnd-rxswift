@@ -11,4 +11,5 @@ import UIKit
 
 struct StoryBoard {
     static let main = UIStoryboard(name: "Main", bundle: nil)
+    static let map = UIStoryboard(name: "Map", bundle: nil)
 }

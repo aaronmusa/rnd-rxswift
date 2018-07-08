@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class CacheManager: NSObject {
     let defaults = UserDefaults.standard
@@ -15,31 +17,35 @@ class CacheManager: NSObject {
     
     static let shared = CacheManager()
     
-    //MARK: Current Session
-    private var currentSession: Device?{
-        get{
-            if let data = self.defaults.object(forKey: currentSessionKey) as? NSData{
-                return NSKeyedUnarchiver.unarchiveObject(with: data as Data) as? Device
-            }
-            return nil
-        }
-        set(newValue){
-            self.defaults.set(NSKeyedArchiver.archivedData(withRootObject: newValue!), forKey: currentSessionKey)
-            self.defaults.synchronize()
-            
-        }
-    }
+    let bag = DisposeBag()
     
-    func getCurrentSession() -> Device? {
-        return currentSession
+    //MARK: Current Session
+    private var currentSession = BehaviorRelay<Device?>(value: nil)
+    
+    func getCurrentSession() -> Observable<Device?> {
+        return Observable.create({ observer in
+            self.currentSession.subscribe(onNext: { (device) in
+                if let data = self.defaults.object(forKey: self.currentSessionKey) as? NSData{
+                    observer.onNext(NSKeyedUnarchiver.unarchiveObject(with: data as Data) as? Device)
+                }
+                else{
+                    observer.onNext(device)
+                }
+//                observer.onCompleted()
+            }).disposed(by: self.bag)
+            return Disposables.create()
+        })
     }
     
     func saveSession(_ session: Device) {
-        currentSession = session
+        self.defaults.set(NSKeyedArchiver.archivedData(withRootObject: session), forKey: currentSessionKey)
+        self.defaults.synchronize()
+        currentSession.accept(session)
     }
         
     func removeCurrentSession() {
         self.defaults.removeObject(forKey: self.currentSessionKey)
+        currentSession.accept(nil)
     }
 
 }
