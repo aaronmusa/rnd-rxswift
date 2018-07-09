@@ -23,12 +23,12 @@ class HomeViewController: UIViewController {
         viewModel = HomeViewModel(Repository.shared)
         
         signOutButton.rx.tap.subscribe(onNext: { _ in
-            self.viewModel.removeSession()
-            self.viewModel.signOut().subscribe(onNext: { (_ ) in
-                self.presentLogin()
-            }, onError: { (error) in
-                print(error.localizedDescription)
-            }).disposed(by: self.bag)
+            self.viewModel.signOut()
+//            self.viewModel.signOut().subscribe(onNext: { (_ ) in
+//                self.presentLogin()
+//            }, onError: { (error) in
+//                print(error.localizedDescription)
+//            }).disposed(by: self.bag)
         }).disposed(by: bag)
         
         exploreMapButton.rx.tap.subscribe(onNext: { _ in

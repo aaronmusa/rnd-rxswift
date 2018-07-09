@@ -12,7 +12,7 @@ import RxCocoa
 @testable import RxDemo
 
 struct ValidInputs {
-    static let email = BehaviorRelay<String>(value: "aaron@gmail.com")
+    static let email = BehaviorRelay<String>(value: "aaron")
     static let password = BehaviorRelay<String>(value: "qqqqqq1")
 }
 
