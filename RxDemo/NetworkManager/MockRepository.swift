@@ -9,6 +9,7 @@
 import Foundation
 import RxSwift
 import RxCocoa
+import SwiftyJSON
 
 struct MockData {
     static let mockUserJson: [String: Any] = ["id": "TEST_ID1",
@@ -87,5 +88,8 @@ class MockRepository: RepositoryProtocol {
         currentSession = nil
     }
     
+    func getMapDirections(_ origin: String, _ destination: String, successHandler: @escaping ([JSON]) -> Void,
+                          errorHandler: @escaping () ->Void) {
+    }
     
 }

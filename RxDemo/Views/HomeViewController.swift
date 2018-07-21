@@ -12,6 +12,7 @@ import RxCocoa
 
 class HomeViewController: UIViewController {
 
+    @IBOutlet weak var tableViewButton: UIButton!
     @IBOutlet weak var exploreMapButton: UIButton!
     @IBOutlet weak var signOutButton: UIButton!
     var viewModel: HomeViewModel!
@@ -31,8 +32,16 @@ class HomeViewController: UIViewController {
 //            }).disposed(by: self.bag)
         }).disposed(by: bag)
         
+        //Explore
         exploreMapButton.rx.tap.subscribe(onNext: { _ in
             self.presentMap()
+        }).disposed(by: bag)
+        
+        //Table View
+        tableViewButton.rx.tap.subscribe(onNext: { _ in
+            if let tableSampleViewController = StoryBoard.main.instantiateViewController(withIdentifier: "TableSampleViewController") as? TableSampleViewController {
+                self.show(tableSampleViewController, sender: self)
+            }
         }).disposed(by: bag)
     }
     
@@ -60,10 +69,13 @@ extension HomeViewController {
     }
     
     func presentMap() {
-        if let nav = StoryBoard.map.instantiateViewController(withIdentifier: "MapViewController") as? UINavigationController {
-            if let _ = nav.viewControllers.first as? MapViewController {
-                show(nav, sender: self)
-            }
+//        if let nav = StoryBoard.map.instantiateViewController(withIdentifier: "Map2ViewController") as? UINavigationController {
+//            if let _ = nav.viewControllers.first as? Map2ViewController {
+//                show(nav, sender: self)
+//            }
+//        }
+        if let viewController = StoryBoard.map.instantiateViewController(withIdentifier: "Map2ViewController") as? Map2ViewController {
+            show(viewController, sender: self)
         }
     }
 }

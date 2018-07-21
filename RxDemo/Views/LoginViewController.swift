@@ -46,9 +46,13 @@ class LoginViewController: UIViewController {
         
         loginButton.rx.tap.subscribe(onNext: { _  in
             self.viewModel.signIn().subscribe(onNext: { (_ ) in
-                if let viewController = StoryBoard.main.instantiateViewController(withIdentifier: "HomeViewController") as? HomeViewController {
-                    self.present(viewController, animated: true, completion: nil)
+                if let nav = StoryBoard.main.instantiateViewController(withIdentifier: "HomeViewController") as? UINavigationController {
+                    if let viewController = nav.viewControllers.first as? HomeViewController {
+                        viewController.navigationController?.navigationBar.isHidden = true
+                        self.present(nav, animated: true, completion: nil)
+                    }
                 }
+                
             }, onError: { (error) in
                 self.errorMessageLabel.isHidden = false
                 self.errorMessageLabel.text = error.localizedDescription

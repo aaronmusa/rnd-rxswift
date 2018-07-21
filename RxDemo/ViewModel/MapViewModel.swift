@@ -19,7 +19,7 @@ class MapViewModel {
     
     var mapView : Observable<GMSMapView> {
         
-        let camera = GMSCameraPosition.camera(withLatitude: 14.4488507, longitude: 120.9851635, zoom: 10.0)
+        let camera = GMSCameraPosition.camera(withLatitude: 14.07, longitude: 0, zoom: 10.0)
         let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
         
         return Observable.just(mapView)

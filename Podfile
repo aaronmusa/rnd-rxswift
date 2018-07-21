@@ -12,6 +12,9 @@ target 'RxDemo' do
   pod 'Firebase/Auth'
   pod 'GoogleMaps'
   pod 'GooglePlaces'
+  pod 'GooglePlacePicker'
+  pod 'SwiftyJSON', '~> 4.0'
+  pod 'Alamofire'
 
   target 'RxDemoTests' do
     inherit! :search_paths

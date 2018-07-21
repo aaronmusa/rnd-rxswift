@@ -32,6 +32,10 @@
 		1E55316220E7EEAA002144DD /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E55316120E7EEAA002144DD /* LoginViewModel.swift */; };
 		1E55316420E89F69002144DD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1E55316320E89F69002144DD /* GoogleService-Info.plist */; };
 		1E55316620E8A777002144DD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E55316520E8A777002144DD /* Constants.swift */; };
+		1E6686272102589600C736DD /* TableSampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6686262102589600C736DD /* TableSampleViewController.swift */; };
+		1E66862921025CE300C736DD /* TableViewSampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E66862821025CE300C736DD /* TableViewSampleViewController.swift */; };
+		1E66862B21034B3400C736DD /* Map2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E66862A21034B3400C736DD /* Map2ViewController.swift */; };
+		1E66862F2103928E00C736DD /* Map2ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E66862E2103928E00C736DD /* Map2ViewModel.swift */; };
 		1E9AD7B120EA61670070F08D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9AD7B020EA61670070F08D /* User.swift */; };
 		371140FAD7C338DBAB395B25 /* Pods_RxDemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A05F486FF7600CCA881DF59B /* Pods_RxDemoTests.framework */; };
 		B317F4ACBB9CD24414352329 /* Pods_RxDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E40B0F95C6A1045F68A80A33 /* Pods_RxDemo.framework */; };
@@ -88,6 +92,10 @@
 		1E55316120E7EEAA002144DD /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		1E55316320E89F69002144DD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1E55316520E8A777002144DD /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		1E6686262102589600C736DD /* TableSampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableSampleViewController.swift; sourceTree = "<group>"; };
+		1E66862821025CE300C736DD /* TableViewSampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewSampleViewController.swift; sourceTree = "<group>"; };
+		1E66862A21034B3400C736DD /* Map2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Map2ViewController.swift; sourceTree = "<group>"; };
+		1E66862E2103928E00C736DD /* Map2ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Map2ViewModel.swift; sourceTree = "<group>"; };
 		1E9AD7B020EA61670070F08D /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		25DCF0FA01C7C501909550E8 /* Pods-RxDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RxDemo/Pods-RxDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		69829513769BBF948F3FF85B /* Pods_RxDemoUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RxDemoUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -220,6 +228,8 @@
 				1E55315F20E7EE37002144DD /* LoginViewController.swift */,
 				1E0CDF9820F0D30300C3450E /* SignUpViewController.swift */,
 				1E0CDFAA20F123AD00C3450E /* MapViewController.swift */,
+				1E6686262102589600C736DD /* TableSampleViewController.swift */,
+				1E66862A21034B3400C736DD /* Map2ViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -231,6 +241,8 @@
 				1E0CDF9620EFE0F800C3450E /* HomeViewModel.swift */,
 				1E0CDF9A20F0DB4600C3450E /* SignUpViewModel.swift */,
 				1E0CDFAC20F128A800C3450E /* MapViewModel.swift */,
+				1E66862821025CE300C736DD /* TableViewSampleViewController.swift */,
+				1E66862E2103928E00C736DD /* Map2ViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -358,7 +370,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0910;
-				LastUpgradeCheck = 0910;
+				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = "Aaron Musa";
 				TargetAttributes = {
 					1E55312D20E7EABD002144DD = {
@@ -434,18 +446,22 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-RxDemo/Pods-RxDemo-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -575,11 +591,13 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-RxDemo/Pods-RxDemo-resources.sh",
 				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
+				"${PODS_ROOT}/GooglePlacePicker/Frameworks/GooglePlacePicker.framework/Resources/GooglePlacePicker.bundle",
 				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlacePicker.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlaces.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -595,13 +613,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				1E0CDF8C20ED0C7D00C3450E /* Repository.swift in Sources */,
+				1E66862921025CE300C736DD /* TableViewSampleViewController.swift in Sources */,
 				1E0CDF9B20F0DB4600C3450E /* SignUpViewModel.swift in Sources */,
 				1E0CDF9720EFE0F800C3450E /* HomeViewModel.swift in Sources */,
 				1E0CDF8E20ED0DFA00C3450E /* Request.swift in Sources */,
 				1E0CDF9E20F0DC7500C3450E /* StringHelper.swift in Sources */,
+				1E6686272102589600C736DD /* TableSampleViewController.swift in Sources */,
 				1E55316620E8A777002144DD /* Constants.swift in Sources */,
 				1E0CDF9020ED130700C3450E /* Device.swift in Sources */,
 				1E0CDFA320F0EF9D00C3450E /* MockRepository.swift in Sources */,
+				1E66862F2103928E00C736DD /* Map2ViewModel.swift in Sources */,
+				1E66862B21034B3400C736DD /* Map2ViewController.swift in Sources */,
 				1E55316220E7EEAA002144DD /* LoginViewModel.swift in Sources */,
 				1E0CDF9920F0D30300C3450E /* SignUpViewController.swift in Sources */,
 				1E9AD7B120EA61670070F08D /* User.swift in Sources */,
@@ -681,6 +703,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -688,6 +711,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -738,6 +762,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -745,6 +770,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -780,10 +806,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 66QCVT44FZ;
+				DEVELOPMENT_TEAM = YAW66AW89G;
 				INFOPLIST_FILE = RxDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.aaronmusa.RxDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jonasaaronmusa.RxDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -796,10 +822,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 66QCVT44FZ;
+				DEVELOPMENT_TEAM = YAW66AW89G;
 				INFOPLIST_FILE = RxDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.aaronmusa.RxDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jonasaaronmusa.RxDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

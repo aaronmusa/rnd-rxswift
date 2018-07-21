@@ -9,6 +9,8 @@
 import Foundation
 import FirebaseAuth
 import RxSwift
+import Alamofire
+import SwiftyJSON
 
 protocol RepositoryProtocol {
     func signIn(email: String, password: String) -> Observable<Any>
@@ -16,7 +18,10 @@ protocol RepositoryProtocol {
     func signUp(email: String, password: String) -> Observable<Any> 
     func getCurrentSession() -> Observable<Device?> 
     func saveSession(json: [String:Any]) 
-    func removeCurrentSession() 
+    func removeCurrentSession()
+    
+    func getMapDirections(_ origin: String, _ destination: String, successHandler: @escaping ([JSON]) -> Void,
+                          errorHandler: @escaping () ->Void) 
 }
 
 class Repository: RepositoryProtocol {
@@ -110,6 +115,65 @@ class Repository: RepositoryProtocol {
             }).disposed(by: self.bag)
             return Disposables.create()
         })
+    }
+    
+    func alamofireRequest(url: String,
+                          successHandler: @escaping ([String: Any]) -> Void,
+                          errorHandler: @escaping (NSError) -> Void)  {
+        
+        Alamofire.request(url).responseJSON { (response) in
+            
+            if let error = response.error {
+                errorHandler(error as NSError)
+            }
+            else{
+                let json = try! JSON(data: response.data!)
+                
+                let jsonDictionary = json.dictionary ?? [:]
+                
+                successHandler(jsonDictionary)
+            }
+        }
+    }
+    
+    func getMapDirections(_ origin: String, _ destination: String, successHandler: @escaping ([JSON]) -> Void,
+                          errorHandler: @escaping () ->Void) {
+        let url = "https://maps.googleapis.com/maps/api/directions/json?origin=\(origin)&destination=\(destination)&mode=driving"
+        
+        alamofireRequest(url: url, successHandler: { (directions) in
+            if let routesJson = directions["routes"] as? JSON {
+                let routes = routesJson.arrayValue
+                
+                successHandler(routes)
+            }
+            
+        }) { (error) in
+            print(error)
+        }
+        
+//        Alamofire.request(url).responseJSON { response in
+//
+//            print(response.request as Any)  // original URL request
+//            print(response.response as Any) // HTTP URL response
+//            print(response.data as Any)     // server data
+//            print(response.result as Any)   // result of response serialization
+//
+//            let json = try! JSON(data: response.data!)
+//            let routes = json["routes"].arrayValue
+//
+//            // print route using Polyline
+//            for route in routes
+//            {
+//                let routeOverviewPolyline = route["overview_polyline"].dictionary
+//                let points = routeOverviewPolyline?["points"]?.stringValue
+//                let path = GMSPath.init(fromEncodedPath: points!)
+//                let polyline = GMSPolyline.init(path: path)
+//                polyline.strokeWidth = 4
+//                polyline.strokeColor = UIColor.red
+//                polyline.map = self.googleMaps
+//            }
+//
+//        }
     }
     
     func removeCurrentSession() {
